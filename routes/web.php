@@ -17,4 +17,7 @@ Route::get('/welcome', 'MainController@welcome');
 
 Route::match(['get', 'post'], '/contact', 'MainController@contact');
 
-// Route::post('/contact', );
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
