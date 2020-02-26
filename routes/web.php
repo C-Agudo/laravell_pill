@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MainController@home');
+
+Route::get('/welcome', 'MainController@welcome');
+
+Route::match(['get', 'post'], '/contact', 'MainController@contact');
+
+// Route::post('/contact', );
