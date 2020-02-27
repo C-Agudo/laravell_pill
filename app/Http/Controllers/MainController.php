@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Articles;
 
 class MainController extends Controller
 {
@@ -27,11 +28,11 @@ class MainController extends Controller
         }      
     }
     public function articles(){
-
-        return view('articles');
+        $items = Articles::paginate(3);
+        return view('articles', compact('items'));
     }
-    public function article(){
-        
-        return view('article');
+    public function article($slug){
+        $item = Articles::where('slug','like',$slug)->get();
+        return view('article', compact('item'));
     }
 }

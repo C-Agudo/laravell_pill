@@ -2,9 +2,15 @@
     
     <body>
         @section('content')
-        <div class="flex-center position-ref full-height">
-            <h1>Welcome to {{ env('APP_NAME') }}</h1>
-        </div>
+        @foreach($items as $variables)
+            <div class="raw">
+                <a href='/articles/{{ $variables->slug}}'><h3>{{ $variables->title }}</h3></a>
+                <p>{{ $variables->summary }}</p>
+                <div>{{ $variables->content }}</div>       
+            </div>                       
+        @endforeach
+        {{ $items->links() }}
+        
         @stop
     </body>
     
