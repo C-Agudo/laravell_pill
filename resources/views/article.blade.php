@@ -7,6 +7,7 @@
             <h3>{{ $variable->title }}</h3>
             <p>{{ $variable->summary }}</p>
             <div>{{ $variable->content }}</div>
+            <a href="/articles"><button class="btn m-2">Go Back</button></a>
         @endforeach     
         </div>
         @stop

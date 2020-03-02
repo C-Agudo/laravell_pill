@@ -1,0 +1,15 @@
+#app{
+    display:flex; 
+    min-height:100vh; 
+    flex-direction:column;
+}
+
+.content{
+    flex-grow: 1;
+}
+
+.img{
+    width: 100px;
+    height: 75px;
+    margin: 10px;
+}

@@ -1,10 +1,10 @@
 @extends('template')
     
-    <body>
         @section('content')
-        <div class="flex-center position-ref full-height">
-            <h1>Welcome to {{ env('APP_NAME') }}</h1>
+        <div class="text-align-center">
+            <h1 class="text-center">Welcome to {{ env('APP_NAME') }}</h1>
         </div>
-        @stop
-    </body>
+        <example-component></example-component>
+        @endsection
+        
     
