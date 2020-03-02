@@ -1,15 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Articles;
 
+
+
+function convertToSlug($string){
+    $valueSearch = ' ';
+    $valueReplace = '_';
+    $correctStr = str_replace($valueSearch, $valueReplace, $string );
+    return strtolower($correctStr);
+}
+
+
 class MainController extends Controller
 {
     //
+
+    
     public function home(){
-        return view('home');
+        $items = Articles::paginate(3);
+        return view('home', compact('items'));
     }
     public function welcome(){
         return view('welcome');
@@ -34,5 +49,18 @@ class MainController extends Controller
     public function article($slug){
         $item = Articles::where('slug','like',$slug)->get();
         return view('article', compact('item'));
+    }
+
+    public function newArticle(Request $request){
+        $title = $request->input('title');
+        $article = DB::table('articles')->insertGetId(array(
+            'user_id'=>1,
+            'title'=> $title,
+            'summary'=> $request->input('summary'),
+            'content'=> $request->input('content'),
+            'slug'=> convertToSlug($title),
+        ));
+        $items = Articles::paginate();
+        return view('home', compact('items'));
     }
 }

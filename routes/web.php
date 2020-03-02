@@ -12,9 +12,7 @@
 */
 Auth::routes();
 
-Route::get('/', 'MainController@home');
-
-Route::get('/welcome', 'MainController@welcome');
+Route::get('/', 'MainController@welcome');
 
 Route::match(['get', 'post'], '/contact', 'MainController@contact');
 
@@ -23,3 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/articles', 'MainController@articles');
 
 Route::get('/articles/{slug}', 'MainController@article');
+
+Route::post('/newArticle','MainController@newArticle');
