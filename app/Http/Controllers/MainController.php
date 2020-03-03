@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMail;
 
 use Illuminate\Http\Request;
 use App\Articles;
@@ -34,9 +36,15 @@ class MainController extends Controller
             $validate = $this->validate($request, [
                 'name' => 'required|string',
                 'email' => 'required|string|email',
-                'tel' => 'number',
+                'tel' => 'int',
                 'consult' => 'required|string|min:55'
             ]);
+            if($validate){
+                $contact=$request->all();
+                Mail::to($request->get('email'))->send( new ContactMail($contact));
+                return back()->with('message', 'Message send properly');
+                
+            }
         }
         if($request->isMethod('get')){
             return view('contact');
